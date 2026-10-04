@@ -1,0 +1,313 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sports Data - Perfil do Time</title>
+
+    <link rel="stylesheet" href="basquete.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<header>
+
+<div class="container">
+
+<div class="topbar">
+
+<a href="basquete.html" class="voltar">
+← Voltar
+</a>
+
+<div class="logo-mini">
+<b>SPORT</b>DATA
+</div>
+
+</div>
+
+</div>
+
+</header>
+
+<section id="banner">
+
+<div class="container banner-conteudo">
+
+<img
+id="escudo"
+class="escudo-grande"
+src=""
+alt="Escudo do Time">
+
+<div class="banner-texto">
+
+<div class="eyebrow" id="pais">
+Brasil
+</div>
+
+<h1 id="nomeTime">
+Carregando...
+</h1>
+
+<p id="descricao">
+Descrição do clube.
+</p>
+
+</div>
+
+<div class="banner-cta">
+
+<button
+id="btnFavorito"
+class="btn-primario"
+onclick="favoritar()">
+
+⭐ Favoritar
+
+</button>
+
+<button
+class="btn-secundario"
+onclick="proximoTime()">
+
+Próximo Time
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<div class="container">
+
+<div class="stats-rapidas">
+
+<div class="stat-card">
+
+<div class="valor" id="fundacao">-</div>
+
+<span class="rotulo">
+FUNDAÇÃO
+</span>
+
+</div>
+
+<div class="stat-card">
+
+<div class="valor" id="estadio">-</div>
+
+<span class="rotulo">
+ESTÁDIO
+</span>
+
+</div>
+
+<div class="stat-card">
+
+<div class="valor" id="tecnico">-</div>
+
+<span class="rotulo">
+TÉCNICO
+</span>
+
+</div>
+
+<div class="stat-card">
+
+<div class="valor" id="titulos">-</div>
+
+<span class="rotulo">
+TÍTULOS
+</span>
+
+</div>
+
+<div class="stat-card">
+
+<div class="valor" id="torcida">-</div>
+
+<span class="rotulo">
+TORCIDA
+</span>
+
+</div>
+
+</div>
+
+<div class="conteudo-time">
+
+<div>
+
+<div class="painel">
+
+<h3>Pesquisar Time</h3>
+
+<input
+type="text"
+id="pesquisa"
+placeholder="Digite o nome do time..."
+style="width:100%;padding:12px;border-radius:8px;background:#16261E;color:white;border:none;">
+
+<br><br>
+
+<button
+class="btn-primario"
+onclick="pesquisarTime()">
+
+Pesquisar
+
+</button>
+
+</div>
+
+<div class="painel">
+
+<h3>Elenco Principal</h3>
+
+<div
+class="elenco-grid"
+id="elenco">
+
+</div>
+
+</div>
+
+<div class="painel">
+
+<h3>Últimos Jogos</h3>
+
+<div
+id="ultimosJogos">
+
+</div>
+
+</div>
+
+</div>
+
+<div>
+
+<div class="painel">
+
+<h3>Próximos Jogos</h3>
+
+<div
+id="proximosJogos">
+
+</div>
+
+</div>
+
+<div class="painel">
+
+<h3>Conquistas</h3>
+
+<div
+class="conquistas-lista"
+id="conquistas">
+
+</div>
+
+</div>
+
+<div class="painel">
+
+<h3>Informações</h3>
+
+<p>
+
+<b>Cidade:</b>
+
+<span id="cidade">
+-
+</span>
+
+</p>
+
+<br>
+
+<p>
+
+<b>Estado:</b>
+
+<span id="estado">
+-
+</span>
+
+</p>
+
+<br>
+
+<p>
+
+<b>Capacidade:</b>
+
+<span id="capacidade">
+-
+</span>
+
+</p>
+
+<br>
+
+<p>
+
+<b>Cores:</b>
+
+<span id="cores">
+-
+</span>
+
+</p>
+
+</div>
+
+<div class="painel">
+
+<h3>Notícias</h3>
+
+<div
+id="noticias">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div id="naoEncontrado">
+
+<h2>
+
+Time não encontrado
+
+</h2>
+
+<p>
+
+Verifique a ortografia e tente novamente.
+
+</p>
+
+</div>
+
+<div id="toastContainer">
+
+</div>
+
+<script src="basquete.js"></script>
+
+</body>
+</html>
+```

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARENA10 — Futebol, Basquete, Vôlei e E-Sports</title>
+<meta name="description" content="Placar ao vivo, notícias e tudo sobre futebol, basquete, vôlei e e-sports em um só lugar.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="arena.css">
+</head>
+<body>
+
+<!-- TICKER: resultados ao vivo rolando -->
+<div id="ticker">
+    <div class="ticker-track" id="tickerTrack">
+        <span><b>● AO VIVO</b>FUT — Palmeiras 2‑1 Flamengo (78')</span>
+        <span>NBA — Lakers 101‑98 Celtics (Q4)</span>
+        <span>VÔLEI — Brasil 3‑1 Itália</span>
+        <span>LOL — LOUD 2‑0 paiN Gaming</span>
+        <span>FUT — Corinthians 6‑1 São Paulo (52')</span>
+        <span>NBB — Flamengo 89‑76 Franca</span>
+        <!-- duplicado para loop contínuo -->
+        <span><b>● AO VIVO</b>FUT — Palmeiras 2‑1 Flamengo (78')</span>
+        <span>NBA — Lakers 101‑98 Celtics (Q4)</span>
+        <span>VÔLEI — Brasil 3‑1 Itália</span>
+        <span>LOL — LOUD 2‑0 paiN Gaming</span>
+        <span>FUT — Corinthians 6‑1 São Paulo (52')</span>
+        <span>NBB — Flamengo 89‑76 Franca</span>
+    </div>
+</div>
+
+<header>
+    <nav class="container">
+        <div class="logo">
+            <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="15" cy="15" r="14" stroke="#3EA669" stroke-width="2"/>
+                <path d="M15 3 L18 10 L26 11 L20 16.5 L21.5 24 L15 20.5 L8.5 24 L10 16.5 L4 11 L12 10 Z" fill="#3EA669"/>
+            </svg>
+            <span>ARENA<b>10</b></span>
+        </div>
+
+        <input id="Pesquisa" type="text" placeholder="Buscar time, jogador, notícia...">
+
+        <button class="hamburguer" id="btnMenu" aria-label="Abrir menu">
+            <span></span><span></span><span></span>
+        </button>
+
+        <ul class="menu-principal" id="menuPrincipal">
+            <li class="menu">
+                <a href="#">Marcas</a>
+                <ul class="submenu">
+                    <li><a href="#">Nike</a></li>
+                    <li><a href="#">Adidas</a></li>
+                    <li><a href="#">Puma</a></li>
+                </ul>
+            </li>
+            <li><a href="time.html">Futebol</a></li>
+            <li><a href="basquete.html">Basquete</a></li>
+            <li><a href="#categorias">Vôlei</a></li>
+            <li><a href="#categorias">E-Sports</a></li>
+            <li><a href="#noticias">Notícias</a></li>
+            <li><a href="#">Contato</a></li>
+        </ul>
+
+        <button id="btnLogin">Entrar</button>
+
+        <div class="conta-usuario" id="contaUsuario" style="display:none">
+            <button class="chip-usuario" id="chipUsuario">
+                <span class="avatar-inicial" id="avatarInicial">?</span>
+                <span id="nomeUsuarioNav">Usuário</span>
+            </button>
+            <div class="dropdown-conta" id="dropdownConta">
+                <button id="btnMeusFavoritos">★ Meus times favoritos</button>
+                <button id="btnSair">Sair</button>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- ===== FUNDO E MODAIS ===== -->
+<div id="fundo"></div>
+
+<div id="login">
+    <button class="fechar" onclick="fecharLogin()">✕</button>
+    <h2>Bem-vindo de volta</h2>
+    <input type="email" id="email" placeholder="Seu e-mail">
+    <input type="password" id="senha" placeholder="Sua senha">
+    <p id="esqueceuSenha" onclick="recuperarSenha()">Esqueceu a senha?</p>
+    <button onclick="entrar()">Entrar</button>
+    <p id="mensagem"></p>
+    <span id="abrirCadastro">Não tem conta? Cadastre-se</span>
+</div>
+
+<div id="cadastro">
+    <button class="fechar" onclick="fecharCadastro()">✕</button>
+    <h2>Criar conta</h2>
+    <input type="text" id="novoNome" placeholder="Nome">
+    <input type="email" id="novoEmail" placeholder="E-mail">
+    <input type="password" id="novaSenha" placeholder="Senha">
+    <button onclick="cadastrar()">Cadastrar</button>
+    <p id="mensagemCadastro"></p>
+    <span id="voltarLogin">Já tem conta? Fazer login</span>
+</div>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+    <div class="container hero-grid">
+        <div class="hero-texto">
+            <span class="eyebrow">Cobertura ao vivo · 24 horas</span>
+            <h1>O JOGO<br><em>É AGORA.</em></h1>
+            <p>Futebol, basquete, vôlei e e-sports em um só lugar — placares em tempo real, bastidores e as notícias que realmente importam.</p>
+            <div class="hero-ctas">
+                <button class="btn-primario" onclick="document.getElementById('categorias').scrollIntoView({behavior:'smooth'})">Ver modalidades</button>
+                <button class="btn-secundario" onclick="document.getElementById('noticias').scrollIntoView({behavior:'smooth'})">Últimas notícias</button>
+            </div>
+        </div>
+
+        <div class="placar-card">
+            <!-- holofote decorativo (SVG próprio) -->
+            <svg class="holofote" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="100,0 180,180 20,180" fill="#3EA669" opacity="0.15"/>
+                <circle cx="100" cy="0" r="14" fill="#F4C430" opacity="0.6"/>
+            </svg>
+
+            <div class="placar-topo">
+                <span class="ao-vivo"><span class="bolinha-viva"></span>AO VIVO</span>
+                <span class="liga">BRASILEIRÃO · 78'</span>
+            </div>
+
+            <div class="placar-times">
+                <div class="time">
+                   <img src="escudo-palmeiras-1.png" alt="" width="53px">
+                    <span class="nome">PALMEIRAS</span>
+                </div>
+
+                <div class="placar-numero" id="placarNumero">
+                    <span id="golsA">0</span><span class="separador">—</span><span id="golsB">0</span>
+                </div>
+
+                <div class="time">
+                    <img src="escudo-flamengo.png" alt="" width="40px">
+                    <span class="nome">FLAMENGO</span>
+                </div>
+            </div>
+
+            <div class="placar-rodape">
+                <span>Maracana</span>
+                <span>PÚBLICO: 41.302</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CATEGORIAS ===== -->
+<section id="categorias" class="container">
+    <div class="secao-topo">
+        <div>
+            <span class="eyebrow">Escolha sua modalidade</span>
+            <h2>Onde o jogo acontece</h2>
+        </div>
+        <p style="max-width:320px">Cada camisa, um número, uma paixão. Escolha a sua.</p>
+    </div>
+
+    <div class="cards">
+        <div class="card futebol">
+            <span class="numero-camisa">10</span>
+            <h3>Futebol</h3>
+            <p>Tabelas, escalações e os gols que decidem o campeonato.</p>
+            <button class="ver-mais" data-esporte="futebol">VER MAIS →</button>
+        </div>
+
+        <div class="card basquete">
+            <span class="numero-camisa">23</span>
+            <h3>Basquete</h3>
+            <p>NBA, NBB e as cestas que fazem a torcida gritar.</p>
+            <button class="ver-mais" data-esporte="basquete">VER MAIS →</button>
+        </div>
+
+        <div class="card volei">
+            <span class="numero-camisa">01</span>
+            <h3>Vôlei</h3>
+            <p>Superliga, seleções e cada ponto até o tie-break.</p>
+            <button class="ver-mais" data-esporte="volei">VER MAIS →</button>
+        </div>
+
+        <div class="card esports">
+            <span class="numero-camisa">GG</span>
+            <h3>E-Sports</h3>
+            <p>LoL, CS e Valorant — campeonatos e resultados na hora.</p>
+            <button class="ver-mais" data-esporte="esports">VER MAIS →</button>
+        </div>
+    </div>
+</section>
+</section>
+
+<!-- ===== CENTRAL DA MODALIDADE ===== -->
+<section id="central" class="container">
+    <div class="secao-topo">
+        <div>
+            <span class="eyebrow">Acompanhe de perto</span>
+            <h2>Central da modalidade</h2>
+        </div>
+    </div>
+
+    <div class="tabs" id="tabs">
+        <button class="tab-btn ativa" data-esporte="futebol">Futebol</button>
+        <button class="tab-btn" data-esporte="basquete">Basquete</button>
+        <button class="tab-btn" data-esporte="volei">Vôlei</button>
+        <button class="tab-btn" data-esporte="esports">E-Sports</button>
+    </div>
+
+    <div class="favoritos-chips vazio" id="favoritosChips"></div>
+
+    <div class="central-grid">
+        <div class="painel">
+            <h3 id="tituloTabela">TABELA — BRASILEIRÃO</h3>
+            <table class="tabela-classificacao">
+                <thead>
+                    <tr>
+                        <th class="num">#</th>
+                        <th></th>
+                        <th>TIME</th>
+                        <th class="num">J</th>
+                        <th class="num">V</th>
+                        <th class="num">PTS</th>
+                        <th class="num">★</th>
+                    </tr>
+                </thead>
+                <tbody id="corpoTabela"></tbody>
+            </table>
+        </div>
+
+        <div class="painel">
+            <h3 id="tituloJogos">PRÓXIMOS JOGOS</h3>
+            <div id="listaJogos"></div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== NOTÍCIAS ===== -->
+<section id="noticias" class="container">
+    <div class="secao-topo">
+        <div>
+            <span class="eyebrow">Cobertura completa</span>
+            <h2>Todas as notícias</h2>
+        </div>
+    </div>
+
+    <div class="filtros-noticias" id="filtrosNoticias">
+        <button class="filtro-btn ativo" data-filtro="todos">Todas</button>
+        <button class="filtro-btn" data-filtro="futebol">Futebol</button>
+        <button class="filtro-btn" data-filtro="basquete">Basquete</button>
+        <button class="filtro-btn" data-filtro="volei">Vôlei</button>
+        <button class="filtro-btn" data-filtro="esports">E-Sports</button>
+    </div>
+
+    <div class="ingressos" id="gradeNoticias"></div>
+
+    <p class="sem-resultados" id="semResultados">Nenhuma notícia encontrada para essa busca.</p>
+
+    <button class="btn-todas" id="btnCarregarMais">Carregar mais notícias</button>
+</section>
+
+<!-- ===== NEWSLETTER ===== -->
+<section id="newsletter">
+    <div class="container newsletter-conteudo">
+        <div>
+            <span class="eyebrow">Não perca nenhum lance</span>
+            <h2>Receba o resumo do dia no seu e-mail</h2>
+        </div>
+        <form class="newsletter-form" id="formNewsletter">
+            <input type="email" id="emailNewsletter" placeholder="seuemail@exemplo.com" required>
+            <button type="submit" class="btn-primario">Quero receber</button>
+        </form>
+    </div>
+</section>
+
+<!-- ===== CONTATO ===== -->
+<section id="contato" class="container">
+    <div class="contato-grid">
+        <div class="contato-info">
+            <span class="eyebrow">Fale com a redação</span>
+            <h2 style="margin:10px 0 18px">Contato</h2>
+            <p>Encontrou um erro, tem uma sugestão de pauta ou quer anunciar com a gente? Manda uma mensagem.</p>
+
+            <div class="contato-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:2px"><rect x="2" y="4" width="20" height="16" rx="2" stroke="#3EA669" stroke-width="1.6"/><path d="M2 6l10 7 10-7" stroke="#3EA669" stroke-width="1.6"/></svg>
+                <div><b>E-mail</b>redacao@arena10.com.br</div>
+            </div>
+            <div class="contato-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:2px"><path d="M12 22s7-7.5 7-13a7 7 0 10-14 0c0 5.5 7 13 7 13z" stroke="#3EA669" stroke-width="1.6"/><circle cx="12" cy="9" r="2.5" stroke="#3EA669" stroke-width="1.6"/></svg>
+                <div><b>Sede</b>São Paulo, SP — Brasil</div>
+            </div>
+        </div>
+
+        <form class="form-contato" id="formContato" novalidate>
+            <div>
+                <input type="text" id="contatoNome" placeholder="Seu nome">
+                <span class="erro-campo" id="erroContatoNome">Digite seu nome.</span>
+            </div>
+            <div>
+                <input type="email" id="contatoEmail" placeholder="Seu e-mail">
+                <span class="erro-campo" id="erroContatoEmail">Digite um e-mail válido.</span>
+            </div>
+            <div>
+                <textarea id="contatoMensagem" rows="5" placeholder="Sua mensagem"></textarea>
+                <span class="erro-campo" id="erroContatoMensagem">Escreva uma mensagem.</span>
+            </div>
+            <button type="submit" class="btn-primario">Enviar mensagem</button>
+        </form>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <div class="logo" style="margin-bottom:14px">
+                    <svg width="26" height="26" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="15" cy="15" r="14" stroke="#3EA669" stroke-width="2"/>
+                        <path d="M15 3 L18 10 L26 11 L20 16.5 L21.5 24 L15 20.5 L8.5 24 L10 16.5 L4 11 L12 10 Z" fill="#3EA669"/>
+                    </svg>
+                    <span>ARENA<b>10</b></span>
+                </div>
+                <p>Cobertura completa de futebol, basquete, vôlei e e-sports — placares, notícias e tudo em tempo real.</p>
+
+                <div style="display:flex;gap:12px;margin-top:18px">
+                    <a href="#" aria-label="Instagram" style="width:36px;height:36px;border:1px solid rgba(242,240,230,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="#F2F0E6" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="#F2F0E6" stroke-width="1.6"/><circle cx="17.5" cy="6.5" r="1.2" fill="#F2F0E6"/></svg>
+                    </a>
+                    <a href="#" aria-label="X" style="width:36px;height:36px;border:1px solid rgba(242,240,230,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M3 3l18 18M21 3L3 21" stroke="#F2F0E6" stroke-width="1.8"/></svg>
+                    </a>
+                    <a href="#" aria-label="YouTube" style="width:36px;height:36px;border:1px solid rgba(242,240,230,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="2" y="5" width="20" height="14" rx="4" stroke="#F2F0E6" stroke-width="1.6"/><path d="M10 9l6 3-6 3z" fill="#F2F0E6"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-colunas">
+                <div class="footer-col">
+                    <h4>Modalidades</h4>
+                    <ul>
+                        <li><a href="#categorias">Futebol</a></li>
+                        <li><a href="#categorias">Basquete</a></li>
+                        <li><a href="#categorias">Vôlei</a></li>
+                        <li><a href="#categorias">E-Sports</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Site</h4>
+                    <ul>
+                        <li><a href="#noticias">Notícias</a></li>
+                        <li><a href="#newsletter">Newsletter</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-fim">
+            <span>© 2026 ARENA10. Todos os direitos reservados.</span>
+            <span>FEITO PARA QUEM VIVE O JOGO</span>
+        </div>
+    </div>
+</footer>
+
+<div id="toastContainer"></div>
+
+<button id="topoBtn" aria-label="Voltar ao topo">↑</button>
+
+<script src="arena.js"></script>
+</body>
+</html>
